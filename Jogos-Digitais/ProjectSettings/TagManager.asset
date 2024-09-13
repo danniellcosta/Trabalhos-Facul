@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - coracao
+  - coracao2
+  - coracao3
+  - Muscleman
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,7 @@
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,11 +10,18 @@ public class GameManager : MonoBehaviour
     public Player player;
     public Transform halter;
     public int multiplicadorInimigo { get; private set; } = 1;
+    public TextMeshPro scoreText;
     public int score { get; private set; }
+    public GameObject coracao1;
+    public GameObject coracao2;
+    public GameObject coracao3;
+    public TextMeshPro gameOverTxt;
+    public TextMeshPro returnTxt;
     public int vidas { get; private set; }
     private void Start()
     {
         NewGame();
+        scoreText.text = "Score: " + score; 
     }
 
     private void Update()
@@ -27,6 +36,8 @@ public class GameManager : MonoBehaviour
     {
         SetScore(0);
         SetVidas(3);
+        gameOverTxt.gameObject.SetActive(false);
+        returnTxt.gameObject.SetActive(false);
         NovoRound();
     }
 
@@ -48,6 +59,7 @@ public class GameManager : MonoBehaviour
         }
 
         this.player.ResetState();
+
     }
     private void GameOver()
     {
@@ -56,17 +68,31 @@ public class GameManager : MonoBehaviour
         {
             this.inimigos[i].gameObject.SetActive(false);
         }
-
+        
         this.player.gameObject.SetActive(false);
+
+        gameOverTxt.gameObject.SetActive(true);
+        returnTxt.gameObject.SetActive(true);
+
     }
     private void SetScore(int score)
     {
         this.score = score;
+        scoreText.text = "Score: " + score; 
     }
 
     private void SetVidas(int vidas)
     {
         this.vidas = vidas;
+        if (this.vidas == 2)
+        {
+            coracao3.SetActive(false); 
+        }else if(this.vidas == 1){
+            coracao2.SetActive(false);
+        }else if (this.vidas == 0)
+        {
+            coracao1.SetActive(false);
+        }
     }
 
     public void InimigoDerrotado(Inimigo inimigo)

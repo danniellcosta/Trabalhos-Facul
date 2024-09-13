@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InimigoScatter : InimigoComportamento
 {
-    public float distanciaDeVerificacao = 1.0f; // Defina o valor apropriado
-    public LayerMask layerMask; // Defina a camada apropriada
+    public float distanciaDeVerificacao = 3.0f; 
+    public LayerMask layerMask; 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -45,6 +46,17 @@ public class InimigoScatter : InimigoComportamento
         {
             Debug.Log("Condições não atendidas para Scatter.");
         }
+    }
+
+    public void OnEnable()
+    {
+        inimigo.chase.Disable();
+        inimigo.scatter.Enable();
+    }
+
+    public void OnDisable(){
+        inimigo.chase.Enable();
+        inimigo.scatter.Disable();
     }
 
 

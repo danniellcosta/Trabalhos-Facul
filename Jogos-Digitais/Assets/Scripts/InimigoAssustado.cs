@@ -30,9 +30,10 @@ public class InimigoAssustado : InimigoComportamento
     {
         if (!this.morto)
         {
-            this.corpo.enabled = false;
-            this.caido.enabled = true;
+            this.corpo.enabled = true;
+            this.caido.enabled = false;
             this.caido.GetComponent<AnimacaoSprite>().Restart();
+            this.Disable();
         }
     }
 
@@ -53,13 +54,14 @@ public class InimigoAssustado : InimigoComportamento
     private void OnEnable()
     {
         this.inimigo.movimento.Multiplicador = 0.5f;
-        this.morto = false;
+        this.morto = true;
     }
 
     private void OnDisable()
     {
         this.inimigo.movimento.Multiplicador = 1.0f;
         this.morto = false;
+        inimigo.scatter.Enable();
 
     }
 

@@ -19,12 +19,13 @@ public class InimigoChase : InimigoComportamento
 
     private void OnDisable()
     {
-        this.inimigo.chase.Enable();
+        this.inimigo.scatter.Enable();
     }
 
     private void OnEnable()
     {
         StartCoroutine(UpdateMovementDirection());
+        inimigo.scatter.Disable();
     }
 
     private IEnumerator UpdateMovementDirection()
